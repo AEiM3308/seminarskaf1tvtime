@@ -11,10 +11,10 @@ if(isset($_POST['create'])) {
     $season_year = isset($_POST['season_year']) ? $_POST['season_year'] : null;
 
     $sql_create = "INSERT INTO races (date, name, location, cover, winner_driver, winner_team, season_id) 
-                        SELECT '$date', '$name', '$location', '$cover', '$winner_driver', '$winner_team', seasons.id
-                            FROM seasons WHERE year = '$season_year'";
+                        SELECT ?, ?, ?, ?, ?, ?, seasons.id
+                            FROM seasons WHERE year = ?";
     $stmt = $pdo->prepare($sql_create);
-    $stmt->execute([$date, $name, $cover, $winner_driver, $winner_team, $season_year]); 
+    $stmt->execute([$date, $name, $location, $cover, $winner_driver, $winner_team, $season_year]); 
     echo "Dirka ustvarjena";                   
 }
 if(isset($_POST['read'])) {
