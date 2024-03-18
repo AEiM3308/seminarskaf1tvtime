@@ -9,16 +9,10 @@ if(isset($_POST['create'])) {
     echo "Leto ustvarjeno";
 }
 
-if(isset($_POST['update'])) {
-    $update_year = $_POST['update_year'];
-    $stmt = $pdo->prepare("UPDATE seasons SET year=:update_year WHERE id=1");
-    $stmt->bindParam(':update_year', $update_year);
-    $stmt->execute();
-}
 if(isset($_POST['read'])) {
     $stmt = $pdo->prepare("SELECT * FROM seasons");
     $stmt->execute();
-    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $result = $stmt->fetchAll();
     foreach($result as $row) {
         echo "Season ID: " . $row['id'] . ", Year: " . $row['year'] . "<br>";
     }
@@ -43,6 +37,7 @@ if(isset($_POST['delete'])) {
         <button type="submit" name="read">Read Seasons</button>
 
         <button type="submit" name="delete">Delete Seasons</button>
+        
 
     </form>
 </body>
