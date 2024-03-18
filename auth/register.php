@@ -22,16 +22,16 @@ if (isset($_POST["username"]) && isset($_POST["email"]) && isset($_POST["passwor
 }
 ?>
 <body>
-    <h2>User Register</h2>
+    <h2 class="text-2xl max-w-xl mx-auto mb-6">User Register</h2>
     <form action="register.php" method="post" class="flex flex-col gap-3 max-w-xl mx-auto">
-        <label for="username" class="border border-green-500 p-2">Username:</label>
-        <input type="text" id="username" name="username" required class="border border-green-500 p-2">
-        <label for="email" class="border border-green-500 p-2">Email:</label>
-        <input type="email" id="email" name="email" required class="border border-green-500 p-2">
-        <label for="password" class="border border-green-500 p-2">Password:</label>
-        <input type="password" id="password" name="password" required class="border border-green-500 p-2">
-        <label for="confirm_password" class="border border-green-500 p-2">Confirm password:</label>
-        <input type="password" id="confirm_password" name="confirm_password" required class="border border-green-500 p-2">
-        <input type="submit" value="register" class="border border-green-500 p-3">
+        <label for="username" >Username:</label>
+        <input type="text" id="username" name="username" required >
+        <label for="email" >Email:</label>
+        <input type="email" id="email" name="email" required >
+        <label for="password" >Password:</label>
+        <input type="password" id="password" name="password" required >
+        <label for="confirm_password" >Confirm password:</label>
+        <input type="password" id="confirm_password" name="confirm_password" required >
+        <input type="submit" value="register">
     </form>
 </body>

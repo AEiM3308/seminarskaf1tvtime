@@ -27,12 +27,12 @@ if (isset($_POST["email"]) && isset($_POST["password"])) {
 ?>
 
 <body>
-    <h2 class="text-4xl">User Login</h2>
+<h2 class="text-2xl max-w-xl mx-auto mb-6">Login</h2>
     <form action="login.php" method="post" class="flex flex-col gap-3 max-w-xl mx-auto">
-        <label for="email" class="border border-green-500 p-2">Email:</label>
-        <input type="email" id="email" name="email" required class="border border-green-500 p-2">
-        <label for="password" class="border border-green-500 p-2">Password:</label>
-        <input type="password" id="password" name="password" required class="border border-green-500 p-2">
-        <input type="submit" value="login" class="border border-green-500 p-3">
+        <label for="email" >Email:</label>
+        <input type="email" id="email" name="email" required >
+        <label for="password" >Password:</label>
+        <input type="password" id="password" name="password" required >
+        <input type="submit" value="login" >
     </form>
 </body>
