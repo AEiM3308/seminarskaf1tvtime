@@ -22,7 +22,7 @@ if (isset($_POST['race_id']) && isset($_SESSION['user'])) {
         $stmt->execute([$user_id, $race_id]);
     }
 
-    header('Location: ' . $_SERVER['HTTP_REFERER']);
+    header('Location: ' . $_SERVER['HTTP_REFERER']); // 1
 } else {
     echo 'error';
 }
