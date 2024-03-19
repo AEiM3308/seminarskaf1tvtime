@@ -1,5 +1,9 @@
 <?php
 include_once("db.php");
+/*
+    starta PHP sejo
+    tm k je tailwind je @layer base je oblikovanje za gumbe pa pac kako oblikovanje je, isto za input pa za body
+*/
 session_start();
 ?>
 <script src="https://cdn.tailwindcss.com"></script>

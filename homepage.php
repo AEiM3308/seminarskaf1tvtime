@@ -1,4 +1,11 @@
 <?php
+
+/*
+    sql stavek izbere vse kar je v tabeli 'season', k so v obliki z razvrsceni po letih pa v padajocem vrstem redu
+    izvrsi se stavel z uprabo PDO in se shrani v $stmt spremenljivki
+        while loop je zato da ponovi vsako sezono, ki jo dobis iz databaze in jih pregleda
+        nato pa pac izpise kot besedilo
+*/
 $sql='SELECT * FROM seasons ORDER BY year DESC';
 $stmt=$pdo->query($sql);
 ?>

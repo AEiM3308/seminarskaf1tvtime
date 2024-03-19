@@ -1,6 +1,19 @@
 <?php
 include_once('dependencies.php');
 
+/*
+    preveri ce je 'year' parameter vkljucen v URL
+    pridobi vrednost le tega parametra
+    pridobi podatke sezone iz databaze
+
+    pridobi dirke ki so povezane z sezono, ki smo jo pridobili iz databaze
+    extracta race ids v niz
+
+    pridobi slike ki si povezane z sezono iz databaze
+
+    pridobi watched dirke iz uporabnika ki je prijavljen
+    extracta wacthed race ids v niz
+*/
 if (isset($_GET['year'])) {
   $year = $_GET['year'];
   $sql = 'SELECT * FROM seasons WHERE id = ?';
@@ -12,16 +25,15 @@ if (isset($_GET['year'])) {
   $stmt = $pdo->prepare($sql);
   $stmt->execute([$year]);
   $races = $stmt->fetchAll();
-  $race_ids = array_map(fn ($race) => $race['id'], $races);
 
   $sql = 'SELECT * FROM images WHERE season_id = ?';
   $stmt = $pdo->prepare($sql);
   $stmt->execute([$year]);
   $images = $stmt->fetchAll();
 
-  $sql = 'SELECT * FROM watched WHERE user_id = ? AND race_id IN (?)';
+  $sql = 'SELECT * FROM watched WHERE user_id = ?';
   $stmt = $pdo->prepare($sql);
-  $stmt->execute([$_SESSION['user']['id'], join(',', $race_ids)]);
+  $stmt->execute([$_SESSION['user']['id']]);
   $watched = $stmt->fetchAll();
   $watched_race_ids = array_map(fn ($watch) => $watch['race_id'], $watched);
 }
@@ -32,6 +44,9 @@ if (isset($_GET['year'])) {
 <script type="module">
   import Swiper from 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.mjs'
 
+/*
+    inicializira swiper
+*/
   const swiper = new Swiper('.swiper', {
     // Optional parameters
     loop: true,
@@ -62,6 +77,10 @@ if (isset($_GET['year'])) {
   <div class="swiper max-h-[466px]">
     <div class="swiper-wrapper">
       <!-- Slides -->
+      <!--
+        inicializira zanko 'foreach' za ponavljanje vsake slike 
+        pregleda vsako sliko 
+      -->
       <?php foreach ($images as $image) :  ?>
         <div class="swiper-slide"><img class="object-cover object-bottom mx-auto" src="<?= $image['path'] ?>"></div>
       <?php endforeach; ?>
@@ -76,14 +95,24 @@ if (isset($_GET['year'])) {
     <h1 class="text-2xl uppercase font-bold mb-2 mt-12">Races</h1>
 
     <ul class="space-y-2">
-      <?php foreach ($races as $race) :  ?>
+      <!--
+        inicializira zanko 'foreach' za ponavljanje vsake dirke 
+        pregleda vsako dirko 
+      -->
+      <?php foreach ($races as $race) :  ?> 
         <li class="even:bg-neutral-900 rounded-lg odd:bg-neutral-900/60 flex items-center justify-between p-3">
           <?= $race['name'] ?>
 
           <div class="flex items-center gap-2">
             <form action='./crud/watched.php' method='post' class="mb-0">
+              <!--
+                izda id od trenutne dirke
+              -->
               <input type='hidden' name='race_id' value='<?= $race['id'] ?>' />
               <button class="flex gap-2">
+                <!--
+                  preveri ce id trenutne dirke obstaja v '$watched_race_ids' in pac tko pol izve ce je dirka 'watched'
+                -->
                 <?php if (in_array($race['id'], $watched_race_ids)) : ?>
                   <img src="assets/cup.png" class="invert w-6">
                 <?php else : ?>

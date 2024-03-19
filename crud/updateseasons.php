@@ -1,6 +1,15 @@
 <?php
 include_once('../dependencies.php');
 
+/*
+    preveri ce ima obrazec vpisano oboje, newyear in oldyear
+    pridobi newyear in oldyear iz podatkov iz obrazca
+    sql stavek izbere season_id na osnovi podaneka starega leta (oldyear)
+    pridobi podatke
+        preusmeri na index.php ce se podatek o starem letu en najde/ne obstaja
+        sql stavek posodobi 'update' season year z newyear
+        izvrsi update, ce je uspesno da doloceno sporoci, ce ni usesno izda error
+*/
 if(isset($_POST['newyear']) && isset($_POST['oldyear'])) {
     $newyear = $_POST['newyear'];
     $oldyear = $_POST['oldyear'];
@@ -29,13 +38,15 @@ if(isset($_POST['newyear']) && isset($_POST['oldyear'])) {
 
 ?>
 
+<?php include '../header.php'; ?>
+
 <body>
-    <h2 class="text-4xl">Update season</h2>
+    <h2 class="text-2xl max-w-xl mx-auto mb-6">Update season</h2>
     <form action="updateseasons.php" method="post" class="flex flex-col gap-3 max-w-xl mx-auto">
-        <label for="oldyear" class="border border-green-500 p-2">Vpisi staro leto</label>
-        <input type="number" id="oldyear" name="oldyear" required class="border border-green-500 p-2">
-        <label for="newyear" class="border border-green-500 p-2">Vpisi novo leto </label>
-        <input type="number" id="newyear" name="newyear" required class="border border-green-500 p-2">
+        <label for="oldyear">Vpisi staro leto</label>
+        <input type="number" id="oldyear" name="oldyear" required>
+        <label for="newyear">Vpisi novo leto </label>
+        <input type="number" id="newyear" name="newyear" required>
         <input type="submit" value="potrdi" class="border border-green-500 p-3">
     </form>
 </body>

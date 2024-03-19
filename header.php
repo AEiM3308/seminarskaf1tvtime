@@ -1,3 +1,7 @@
+<!-- 
+    ugl to je samo styling za header k se bo uporabli na tstih pageih k je not uklucen z mal phpja kjer pac dobi iz seje uporabnika, njegov username
+-->
+
 <header class="flex justify-between items-center px-4 py-2 border-b border-neutral-600 pb-4">
   <div class="flex gap-3">
   <a href="/seminarska/index.php">Home</a>

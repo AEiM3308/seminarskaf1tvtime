@@ -1,6 +1,13 @@
 <?php 
 include_once("../dependencies.php");
-
+/*
+    preveri a so vsa potreba polja dolocena v POST
+    dobi vse informacije iz POST spremenljivk
+        preveri ce je geslo ki je vpisano enako geslu v polju kjer se preveri identicnost
+            geslo se hasha za bcrypt, za vecjo varnost
+            sql stavek vpise se podatke v databazo
+            pripravi stmt, ki ga pol izvede z user data kot parameter
+*/
 if (isset($_POST["username"]) && isset($_POST["email"]) && isset($_POST["password"]) && isset($_POST["confirm_password"]))
 {
     $username = $_POST["username"];

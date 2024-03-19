@@ -1,4 +1,12 @@
 <?php
+/*
+    razclenjevanje vsebine od datoteke .env in shranjevanje v spremenljivki $ev
+    definiranje konstrant za parametre kateri so pvezani na pazo podatkov s pomocjo $env (datoteka .env)
+        ustvari nou PDO objekt za povezavo databaze z uporabo definiranih konstrant
+        nastimavljenje PDO errorja da vrze exceptione na error
+        catcha PDOexception, ce se zgodi med povezovanjem
+        da error message
+*/
 $env = parse_ini_file('.env');
 define('DATABASE_HOST', $env['DATABASE_HOST']);
 define('DATABASE_PORT', $env['DATABASE_PORT']);
