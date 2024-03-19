@@ -18,6 +18,8 @@ if (isset($_POST["username"]) && isset($_POST["email"]) && isset($_POST["passwor
         $sql = "INSERT INTO users (username, email, password_hash) VALUES (?,?,?)";
         $stmt = $pdo->prepare($sql);
         $stmt->execute([$username, $email, $password_hash]);
+
+        header("location: ../auth/login.php");
     }
 }
 ?>
